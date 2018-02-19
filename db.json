@@ -2,12 +2,12 @@
   "users": [
     {
       "id": "23",
-      "fistName": "Bill",
+      "firstName": "Bill",
       "age": 20
     },
     {
       "id": "40",
-      "name": "Alex",
+      "firstName": "Alex",
       "age": 41
     }
   ]
