@@ -55,7 +55,7 @@ const RootQuery = new GraphQLObjectType({
     },
     company: {
       type: CompanyType,
-      args: {id: {type: GraphQLString}},
+      args: { id: { type: GraphQLString } },
       resolve(parentValue, args) {
         return axios.get(`http://localhost:3000/companies/${args.id}`)
           .then(resp => resp.data);
@@ -70,17 +70,27 @@ const mutation = new GraphQLObjectType({
     addUser: {
       type: UserType,
       args: {
-        firstName: {type: new GraphQLNonNull(GraphQLString)},
-        age: {type: new GraphQLNonNull(GraphQLInt)},
-        companyId: {type: GraphQLString},
+        firstName: { type: new GraphQLNonNull(GraphQLString) },
+        age: { type: new GraphQLNonNull(GraphQLInt) },
+        companyId: { type: GraphQLString },
       },
-      resolve(parentValue, {firstName, age}) {
+      resolve(parentValue, { firstName, age }) {
         return axios.post('http://localhost:3000/users', {
           firstName,
           age
         })
           .then(res => res.data);
       },
+    },
+    deleteUser: {
+      type: UserType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      resolve(parentValue, { id }) {
+        return axios.delete(`http://localhost:3000/users/${id}`)
+          .then(res => res.data);
+      }
     }
   }
 });
